@@ -1,4 +1,5 @@
-﻿
+﻿#include <gl/GL.h>
+#include "CAdminControl.h"
 // WinOGLView.h : CWinOGLView クラスのインターフェイス
 //
 
@@ -7,6 +8,7 @@
 
 class CWinOGLView : public CView
 {
+
 protected: // シリアル化からのみ作成します。
 	CWinOGLView() noexcept;
 	DECLARE_DYNCREATE(CWinOGLView)
@@ -39,6 +41,20 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+private:
+	// OpenGL を利用するために使用する変数
+	HGLRC m_hRC;
+	
+	double L_Click_x;
+	double L_Click_y;
+
+	CAdminControl AC;
+
+public:
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg void OnDestroy();
+	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 };
 
 #ifndef _DEBUG  // WinOGLView.cpp のデバッグ バージョン
