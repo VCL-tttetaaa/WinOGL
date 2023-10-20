@@ -41,6 +41,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+
 private:
 	// OpenGL を利用するために使用する変数
 	HGLRC m_hRC;
@@ -55,10 +56,16 @@ public:
 	afx_msg void OnDestroy();
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	afx_msg void OnSize(UINT nType, int cx, int cy);
+	void CWinOGLView::OnXyz();
+	void CWinOGLView::OnUpdateXyz(CCmdUI* pCmdUI);
 };
 
 #ifndef _DEBUG  // WinOGLView.cpp のデバッグ バージョン
 inline CWinOGLDoc* CWinOGLView::GetDocument() const
    { return reinterpret_cast<CWinOGLDoc*>(m_pDocument); }
 #endif
+
+
+
+
 

@@ -26,10 +26,17 @@ private:
 	CShape* New_shape;
 	int count;
 	int count2;
+	bool AxisFlag;
 public:
 	// クリックした点のxy座標を取得
 	void L_Click(double click_x, double click_y);
 	// 線を引く
 	void DrawLine(CVertex* start, CVertex* end);
 	double CalcDistance(CVertex* new_vertex, CVertex* vertex_head);
+	// 座標軸を描画する処理をまとめる関数
+	void DrawAxis();
+	// AxisFlagを返す
+	bool GetAxisFlag();
+	// AxisFlagを切り替える
+	void SetAxisFlag(bool flag);
 };

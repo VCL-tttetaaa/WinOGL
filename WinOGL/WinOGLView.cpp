@@ -208,3 +208,33 @@ void CWinOGLView::OnSize(UINT nType, int cx, int cy) //cxとcyが画面サイズ
 	RedrawWindow();
 	wglMakeCurrent(clientDC.m_hDC, NULL);
 }
+
+
+
+
+void CWinOGLView::OnXyz()
+{
+	/*--------------------------------------------------------*/
+/* CAdminControlクラスのメンバ変数AxisFlagの状態を切り替える
+*/
+/*--------------------------------------------------------*/
+	if (AC.GetAxisFlag() == true) {
+		AC.SetAxisFlag(false);
+	}
+	else {
+		AC.SetAxisFlag(true);
+	}
+	RedrawWindow();
+}
+
+
+void CWinOGLView::OnUpdateXyz(CCmdUI* pCmdUI)
+{
+	// AxisFlagがtrueのときボタンが沈む
+	if (AC.GetAxisFlag() == true) {
+		pCmdUI->SetCheck(true);
+	}
+	else {
+		pCmdUI->SetCheck(false);
+	}
+}

@@ -12,6 +12,7 @@ CAdminControl::CAdminControl()
 	*/
 	count = 0;
 	count2 = 0;
+	AxisFlag = false;
 }
 
 CAdminControl::~CAdminControl()
@@ -21,7 +22,6 @@ CAdminControl::~CAdminControl()
 
 void CAdminControl::Draw()
 {
-
 	if (shape_head != NULL) {
 		for(CShape* last_shape = shape_head; last_shape != NULL; last_shape= last_shape->GetNext()){
 			for (CVertex* Vertex = last_shape->GetVertexHead(); Vertex != NULL; Vertex = Vertex->GetNext()) {
@@ -33,6 +33,11 @@ void CAdminControl::Draw()
 				if (Vertex->GetNext() != NULL) {
 					DrawLine(Vertex, Vertex->GetNext());
 				}
+				// AxisFlagがtrueのとき座標軸を描画する
+				if (AxisFlag) {
+					DrawAxis();
+				}
+
 			}
 		}
 	}
@@ -136,3 +141,40 @@ void CAdminControl::DrawLine(CVertex* start, CVertex* end)
 			glVertex2f(end->GetX(), end->GetY());
 			glEnd();
 	}
+
+
+// 座標軸を描画する処理をまとめる関数
+void CAdminControl::DrawAxis()
+{
+	glBegin(GL_LINES);
+	// x軸
+	glColor3f(1.0, 0.0, 0.0);
+	glVertex3f(-1.0, 0.0, 0.0);
+	glVertex3f(1.0, 0.0, 0.0);
+	// y軸
+	glColor3f(0.0, 1.0, 0.0);
+	glVertex3f(0.0, -1.0, 0.0);
+	glVertex3f(0.0, 1.0, 0.0);
+	// z軸
+	glColor3f(0.0, 0.0, 1.0);
+	glVertex3f(0.0, 0.0, -1.0);
+	glVertex3f(0.0, 0.0, 1.0);
+	glEnd();
+}
+
+
+
+// AxisFlagを返す
+bool CAdminControl::GetAxisFlag()
+{
+	// TODO: ここに実装コードを追加します.
+	return AxisFlag;
+}
+
+
+// AxisFlagを切り替える
+
+void CAdminControl::SetAxisFlag(bool flag)
+{
+	AxisFlag = flag;
+}
